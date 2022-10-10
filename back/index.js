@@ -14,17 +14,24 @@ const {
 } = require("./controllers/users")
 
 const {
-    getSauces
+    getSauces,
+    createSauces
 } = require("./controllers/sauces")
+
 
 //Middleware
 app.use(cors())
 app.use(express.json())
 
+const {
+    authenticateUser
+} = require("./middleware/auth")
+
 //Routes
 app.post("/api/auth/signup", createUser)
 app.post("/api/auth/login", logUser)
-app.get("/api/sauces", getSauces)
+app.get("/api/sauces", authenticateUser, getSauces)
+app.post("/api/sauces", authenticateUser, createSauces)
 app.get("/", (req, res) => res.send("hello world!"))
 
 //Listen

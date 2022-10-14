@@ -1,7 +1,7 @@
 const {
     User
 } = require("../mongo")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt") // technique de hachage utilisée pour se protéger du mot de passe contre les attaques des hackers en stockant les mots de passe sous un format « bcrypté »
 const jwt = require("jsonwebtoken")
 
 async function createUser(req, res) {
@@ -29,7 +29,7 @@ async function createUser(req, res) {
 }
 
 function hashPassword(password) {
-    const saltRounds = 10
+    const saltRounds = 10 //tours de hachage
     return bcrypt.hash(password, saltRounds)
 }
 

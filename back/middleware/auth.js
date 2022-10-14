@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken") // permet l'échange sécurisé de jetons (tokens) entre plusieurs parties
 
 function authenticateUser(req, res, next) {
     console.log("authenticate user")

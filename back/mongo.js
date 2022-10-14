@@ -1,6 +1,6 @@
 //Database
 const mongoose = require("mongoose")
-const uniqueValidator = require("mongoose-unique-validator")
+const uniqueValidator = require("mongoose-unique-validator") // package de validation pour prévalider les informations avant de les enregistrer
 const password = process.env.DB_PASSWORD
 const username = process.env.DB_USERNAME
 const uri = `mongodb+srv://${username}:${password}@cluster0.fqyz4.mongodb.net/?retryWrites=true&w=majority`;

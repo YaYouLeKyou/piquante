@@ -1,7 +1,7 @@
 const User = require('../models/User')
 
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
+const bcrypt = require("bcrypt") //appel du package bcrypt
+const jwt = require("jsonwebtoken") //appel du package jsonwebtoken
 
 async function createUser(req, res) {
   try {
@@ -24,6 +24,8 @@ async function createUser(req, res) {
     })
   }
 }
+
+//Cryptage du mot de passe, on hash le password en le salant 10 fois
 
 function hashPassword(password) {
   const saltRounds = 10
@@ -56,6 +58,9 @@ async function logUser(req, res) {
     })
   }
 }
+
+//utilisation d' un token unique pour contrer les piratage de session,
+//clé unique d' une durée de 24h
 
 function createToken(email) {
   const jwtPassword = process.env.JWT_PASSWORD

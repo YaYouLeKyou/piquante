@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose') //importation package mongoose
 
 
 const productSchema = new mongoose.Schema({

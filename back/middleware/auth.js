@@ -1,28 +1,17 @@
-const jwt = require("jsonwebtoken")
+const jwt = require('jsonwebtoken');
 
-//fonction d' authentification, on decode et compare le token
-
-function authenticateUser(req, res, next) {
-  console.log("authenticate user")
-  const header = req.header("Authorization")
-  if (header == null) return res.status(403).send({
-    message: "Invalid"
-  })
-
-  const token = header.split(" ")[1]
-  if (token == null) return res.status(403).send({
-    message: "Token cannot be null"
-  })
-
-  jwt.verify(token, process.env.JWT_PASSWORD, (err, decoded) => {
-    if (err) return res.status(403).send({
-      message: "Token invalid " + err
-    })
-    console.log("Le token est bien valide, on continue")
+module.exports = (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1]
+    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET')
+    const userId = decodedToken.userId
+    console.log('id from Auth')
+    console.log(userId)
+    req.auth = { userId}
     next()
-  })
-}
-
-module.exports = {
-  authenticateUser
-}
+  } catch {
+    res.status(401).json({
+      error: new Error('Invalid request!')
+    });
+  }
+};
